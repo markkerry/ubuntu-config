@@ -3,26 +3,17 @@
 Add K8S key and Repo (All hosts)
 
 ```bash
-curl -s https://packages.cloud.google.com/apt... | sudo apt-key add -
-cat (ADD 2 "LESS THAN" SIGNS HERE WITHOUT BRACKETS)EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
-deb https://apt.kubernetes.io/ kubernetes-xenial main
-EOF
+sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+
+echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 ```
 
 Update the package repository and Install K8S components (All hosts):
 
 ```bash
-sudo apt-get update
-sudo apt-get install -y kubelet=1.18.1-00 
-sudo apt-get install -y kubeadm=1.18.1-00 
-sudo apt-get install -y kubectl=1.18.1-00
+sudo apt update
+sudo apt install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
-```
-
-Add the hosts entry (All hosts)
-
-```bash
-edit the file "/etc/hosts"
 ```
 
 Disable SWAP (All hosts)
@@ -31,7 +22,18 @@ Disable SWAP (All hosts)
 sudo swapoff -a
 ```
 
-edit /etc/fstab to remove the swap entry by commenting it out
+Edit `/etc/fstab` to remove the swap entry by commenting it out
+
+```bash
+sudo vim /etc/fstab
+
+# /swap.img   none  swap  sw  0   0
+```
+
+Then restart the servers.
+
++++++ AM HERE +++++
+
 
 Initiate the Cluster(Only on Master node)
 
@@ -50,6 +52,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 Pod Network Addon(Calico) (Only on Master node)
 
 ```bash
+curl https://projectcalico.docs.tigera.io/manifests/calico.yaml -O
 vi calico.yaml
 ```
 
