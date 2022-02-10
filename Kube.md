@@ -35,7 +35,7 @@ Then restart the servers.
 Initiate the Cluster(Only on Master node)
 
 ```bash
-sudo kubeadm init --control-plane-endpoint kube-master:6443 --pod-network-cidr 10.10.0.0/16
+sudo kubeadm init --control-plane-endpoint ctrlplane:6443 --pod-network-cidr 10.10.0.0/16
 ```
 
 Set the kubectl context auth to connect to the cluster(Only on Master node)
