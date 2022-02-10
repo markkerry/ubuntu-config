@@ -32,9 +32,6 @@ sudo vim /etc/fstab
 
 Then restart the servers.
 
-+++++ AM HERE +++++
-
-
 Initiate the Cluster(Only on Master node)
 
 ```bash
