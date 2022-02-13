@@ -28,6 +28,15 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io -y
 # add user to Docker group
 sudo usermod -a -G docker $USER
 
+sudo touch /etc/docker/daemon.json
+cat <<EOF | sudo tee /etc/docker/daemon.json
+{
+    "exec-opts": ["native.cgroupdriver=systemd"]
+}
+EOF
+
 # set Docker to start automatically
 sudo systemctl enable docker.service
 sudo systemctl enable containerd.service
+
+sudo systemctl restart docker
