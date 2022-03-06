@@ -1,0 +1,41 @@
+# install-services.yaml
+---
+  - hosts: loadbalancers
+    become: true
+    tasks:
+      - name: Installing apache
+        apt: name=apache2 state=present
+      - name: Ensure apache starts
+        service: name=apache2 state=started enabled=yes
+      - name: Enable lbmethod_byrequests apache module
+        community.general.apache2_module:
+          state: present
+          name: lbmethod_byrequests
+      - name: Enable proxy_balancer apache module
+        community.general.apache2_module:
+          state: present
+          name: proxy_balancer
+      - name: Enable proxy_http apache module
+        community.general.apache2_module:
+          state: present
+          name: proxy_http
+      - name: Enable proxy apache module
+        community.general.apache2_module:
+          state: present
+          name: proxy
+
+  - hosts: webservers
+    become: true
+    tasks:
+      - name: Installing apache
+        apt: name=apache2 state=present
+      - name: Install software-properties-common
+        apt: name=software-properties-common
+      - name: Add repo php
+        apt_repository: repo="ppa:ondrej/php"
+      - name: Updating the repo
+        apt: update_cache=yes
+      - name: Installing php
+        apt: name=php state=present
+      - name: Ensure apache starts
+        service: name=apache2 state=started enabled=yes

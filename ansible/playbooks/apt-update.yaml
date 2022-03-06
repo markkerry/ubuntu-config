@@ -1,0 +1,7 @@
+# apt-update.yaml
+---
+  - hosts: webservers:loadbalancers
+    become: true
+    tasks:
+      - name: Update apt packages
+        apt: name=* state=latest

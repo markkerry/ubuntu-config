@@ -1,0 +1,7 @@
+# check-apache.yaml
+---
+  - hosts: webservers:loadbalancers
+    become: true
+    tasks:
+      - name: Check status of apache
+        command: service apache2 status

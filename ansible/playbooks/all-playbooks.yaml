@@ -1,0 +1,8 @@
+# all-playbooks.yaml
+---
+  - import_playbook: ping.yaml
+  - import_playbook: apt-update.yaml
+  - import_playbook: install-services.yaml
+  - import_playbook: app-setup.yaml
+  - import_playbook: lb-setup.yaml
+  - import_playbook: check-apache.yaml
