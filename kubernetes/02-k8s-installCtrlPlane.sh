@@ -14,8 +14,8 @@ mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
-curl https://raw.githubusercontent.com/markkerry/ubuntu-config/main/calico.yaml -O
-curl https://raw.githubusercontent.com/markkerry/ubuntu-config/main/sample-deployment.yaml -O
+curl https://raw.githubusercontent.com/markkerry/ubuntu-config/main/kubernetes/calico.yaml -O
+curl https://raw.githubusercontent.com/markkerry/ubuntu-config/main/kubernetes/sample-deployment.yaml -O
 
 kubectl apply -f calico.yaml
 kubectl apply -f sample-deployment.yaml
