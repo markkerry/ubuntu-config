@@ -1,0 +1,14 @@
+# vault-example.yaml
+---
+  - hosts: loadbalancers
+
+    vars_files:
+      - ../vault/secret-vars.yaml
+
+    tasks:
+      - name: show tenant_id var
+        debug:
+          msg: "{{ tenant_id }}"
+      - name: show tenant name
+        debug:
+          msg: "{{ tenant_name }}"

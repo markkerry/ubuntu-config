@@ -1,0 +1,22 @@
+---
+# tasks file for ansible-roles/webservers
+- name: Copy app files
+  copy:
+    src: ../files/index.php
+    dest: "{{ app_path }}"
+    mode: 0755
+  notify: restart apache
+    
+- name: Delete index.html
+  ansible.builtin.file:
+    path: "{{ app_path }}/index.html"
+    state: absent
+  notify: restart apache
+  
+- name: gather directory contents
+  command: ls -al {{ app_path }}
+  register: dir_content
+  
+- name: show directory contents
+  debug:
+    msg: "{{ dir_content }}"

@@ -1,0 +1,3 @@
+---
+# vars file for ansible-roles/webservers
+app_path: "/var/www/html"

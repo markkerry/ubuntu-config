@@ -1,0 +1,11 @@
+# hosts-dev
+
+[webservers]
+web1 ansible_host=10.0.2.21
+web2 ansible_host=10.0.2.22
+
+[loadbalancers]
+lb1 ansible_host=10.0.2.20
+
+[local]
+control ansible_connection=local
